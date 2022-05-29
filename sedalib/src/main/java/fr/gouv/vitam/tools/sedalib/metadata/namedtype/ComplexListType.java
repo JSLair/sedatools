@@ -30,6 +30,7 @@ package fr.gouv.vitam.tools.sedalib.metadata.namedtype;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.gouv.vitam.tools.sedalib.core.Seda2Version;
 import fr.gouv.vitam.tools.sedalib.metadata.SEDAMetadata;
+import fr.gouv.vitam.tools.sedalib.metadata.content.DescriptionLevel;
 import fr.gouv.vitam.tools.sedalib.metadata.content.Gps;
 import fr.gouv.vitam.tools.sedalib.utils.SEDALibException;
 import fr.gouv.vitam.tools.sedalib.xml.SEDAXMLEventReader;
@@ -94,7 +95,7 @@ public abstract class ComplexListType extends NamedTypeMetadata {
      *
      * @param elementName the element name
      */
-    public ComplexListType(String elementName) {
+    protected ComplexListType(String elementName) {
         super(elementName);
         this.metadataList = new ArrayList<>();
     }
@@ -551,6 +552,8 @@ public abstract class ComplexListType extends NamedTypeMetadata {
                     return ((TextType) sm).getValue();
                 else if ((sm instanceof TextType) && (((TextType) sm).getLang().equals("fr")))
                     langText = ((TextType) sm).getValue();
+                else if (sm instanceof DescriptionLevel)
+                    return ((DescriptionLevel) sm).getValue();
                 else if (sm instanceof DateTimeType) {
                     if (((DateTimeType) sm).getValue()==null)
                         return "";
