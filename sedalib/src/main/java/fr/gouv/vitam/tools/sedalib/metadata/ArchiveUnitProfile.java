@@ -39,6 +39,8 @@ package fr.gouv.vitam.tools.sedalib.metadata;
 
 import fr.gouv.vitam.tools.sedalib.metadata.namedtype.StringType;
 
+import java.util.LinkedHashMap;
+
 /**
  * The Class ArchiveUnitProfile.
  * <p>
@@ -66,5 +68,20 @@ public class ArchiveUnitProfile extends StringType {
      */
     public ArchiveUnitProfile(String value) {
         super("ArchiveUnitProfile", value);
+    }
+
+    /**
+     * Export the ArchiveUnitProfile metadata to csv List for the csv metadata file.
+     * <p>
+     * In the HashMap result, the key is a metadata path of a leaf and the value is
+     * the leaf of the metadata value.
+     *
+     * @return the linked hash map with header title as key and metadata value as
+     *         value
+     */
+    public LinkedHashMap<String, String> externToCsvList() {
+        LinkedHashMap<String, String> result = new LinkedHashMap<>();
+        result.put("ArchiveUnitProfile", getValue());
+        return result;
     }
 }
